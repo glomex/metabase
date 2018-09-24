@@ -32,6 +32,7 @@
              [normalize-query :as normalize]
              [parameters :as parameters]
              [permissions :as perms]
+             [add-query-throttle :as query-throttle]
              [resolve :as resolve]
              [resolve-driver :as resolve-driver]
              [results-metadata :as results-metadata]
@@ -115,6 +116,7 @@
       bind-timezone/bind-effective-timezone
       fetch-source-query/fetch-source-query
       store/initialize-store
+      query-throttle/maybe-add-query-throttle
       log-query/log-initial-query
       ;; TODO - bind *query* here ?
       cache/maybe-return-cached-results
