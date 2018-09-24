@@ -1,7 +1,10 @@
 (ns metabase.query-processor.middleware.add-query-throttle-test
-  (:require [metabase.query-processor.middleware.add-query-throttle :as throttle :refer :all]
-            [expectations :refer :all]
-            [metabase.util :as u])
+  (:require  [expectations :refer :all]
+             [metabase.query-processor.middleware
+              [add-query-throttle :as throttle :refer :all]
+              [catch-exceptions :as catch-exceptions]]
+             [metabase.test.data :as data]
+             [metabase.util :as u])
   (:import java.util.concurrent.Semaphore))
 
 (defmacro ^:private exception-and-message [& body]
@@ -17,12 +20,29 @@
 (expect
   {:ex-class clojure.lang.ExceptionInfo
    :msg      "Max concurrent query limit reached"
-   :data     {:status 503}}
+   :data     {:status-code 503
+              :type        ::throttle/concurrent-query-limit-reached}}
   (with-redefs [throttle/max-query-wait-time-in-seconds 1]
     (exception-and-message
      (let [semaphore (Semaphore. 5)]
        (.acquire semaphore 5)
        ((#'throttle/throttle-queries semaphore (constantly "Should never be returned")) {})))))
+
+;; The `catch-exceptions` middleware catches any query pipeline errors and reformats it as a failed query result. The
+;; 503 exception here is special and should be bubbled up
+(expect
+  {:ex-class clojure.lang.ExceptionInfo
+   :msg      "Max concurrent query limit reached"
+   :data     {:status-code 503
+              :type        ::throttle/concurrent-query-limit-reached}}
+  (with-redefs [throttle/max-query-wait-time-in-seconds 1]
+    (exception-and-message
+     (let [semaphore (Semaphore. 5)
+           my-qp     (->> identity
+                          (#'throttle/throttle-queries semaphore)
+                          catch-exceptions/catch-exceptions)]
+       (.acquire semaphore 5)
+       (my-qp {:my "query"})))))
 
 ;; Test that queries are "enqueued" for the timeout period and if another slot becomes available, it is used
 (expect

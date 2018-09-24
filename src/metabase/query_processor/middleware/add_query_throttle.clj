@@ -5,13 +5,13 @@
             [puppetlabs.i18n.core :refer [tru]])
   (:import [java.util.concurrent Semaphore TimeUnit]))
 
-(defn- calculate-max-queries-from-max-threads []
+(def ^:private calculate-max-queries-from-max-threads
   (let [max-threads (or (config/config-int :mb-jetty-maxthreads) 50)]
     (int (Math/ceil (/ max-threads 2)))))
 
 (defn- ^Semaphore create-query-semaphore []
   (let [total-concurrent-queries (or (config/config-int :mb-max-concurrent-queries)
-                                     (calculate-max-queries-from-max-threads))]
+                                     calculate-max-queries-from-max-threads)]
     (Semaphore. total-concurrent-queries true)))
 
 (def ^Semaphore ^:private query-semaphore (create-query-semaphore))
@@ -19,7 +19,8 @@
 (defn- throw-503-unavailable
   []
   (throw (ex-info (tru "Max concurrent query limit reached")
-           {:status 503})))
+           {:type        ::concurrent-query-limit-reached
+            :status-code 503})))
 
 ;; Not marking this as `const` so it can be redef'd in tests
 (def ^:private max-query-wait-time-in-seconds 5)
