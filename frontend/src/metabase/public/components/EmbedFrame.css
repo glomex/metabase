@@ -1,5 +1,119 @@
+@font-face {
+  font-family: "glober";
+
+  src: url('/app/assets/fonts/Glober_web/glober_-_regular-webfont.eot'); /* IE9 Compat Modes */
+  src: url('/app/assets/fonts/Glober_web/glober_-_regular-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('/app/assets/fonts/Glober_web/glober_-_regular-webfont.woff') format('woff'), /* Modern Browsers */
+  url('/app/assets/fonts/Glober_web/glober_-_regular-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+  url('/app/assets/fonts/Glober_web/glober_-_regular-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+
+  font-weight: regular;
+}
+
+@font-face {
+  font-family: "glober";
+
+  src: url('/app/assets/fonts/Glober_web/glober_-_bold-webfont.eot'); /* IE9 Compat Modes */
+  src: url('/app/assets/fonts/Glober_web/glober_-_bold-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('/app/assets/fonts/Glober_web/glober_-_bold-webfont.woff') format('woff'), /* Modern Browsers */
+  url('/app/assets/fonts/Glober_web/glober_-_bold-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+  url('/app/assets/fonts/Glober_web/glober_-_bold-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "morebi_rounded";
+
+  src: url('/app/assets/fonts/Morebi_web/gt-canary_-_morebirounded-regular-webfont.eot'); /* IE9 Compat Modes */
+  src: url('/app/assets/fonts/Morebi_web/gt-canary_-_morebirounded-regular-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('/app/assets/fonts/Morebi_web/gt-canary_-_morebirounded-regular-webfont.woff') format('woff'), /* Modern Browsers */
+  url('/app/assets/fonts/Morebi_web/gt-canary_-_morebirounded-regular-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+  url('/app/assets/fonts/Morebi_web/gt-canary_-_morebirounded-regular-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+
+  font-weight: regular;
+}
+
+@font-face {
+  font-family: "morebi_rounded";
+
+  src: url('/app/assets/fonts/Morebi_web/gt-canary_-_morebirounded-bold-webfont.eot'); /* IE9 Compat Modes */
+  src: url('/app/assets/fonts/Morebi_web/gt-canary_-_morebirounded-bold-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('/app/assets/fonts/Morebi_web/gt-canary_-_morebirounded-bold-webfont.woff') format('woff'), /* Modern Browsers */
+  url('/app/assets/fonts/Morebi_web/gt-canary_-_morebirounded-bold-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+  url('/app/assets/fonts/Morebi_web/gt-canary_-_morebirounded-bold-webfont.svg#svgFontName') format('svg'); /* Legacy iOS */
+
+  font-weight: bold;
+}
+
+
 .EmbedFrame {
   background-color: white;
+  font-family: glober, Helvetica, Arial, sans-serif;
+}
+
+.EmbedFrame .h4 {
+  font-family: morebi_rounded,Helvetica,Arial,sans-serif;
+  // font-weight: bold;
+  font-size: 22px;
+  color: #0055af;
+  text-transform: uppercase;
+}
+
+
+.ParameterWidget__container___tfpVo.index__flex___38618.index__align-center___3Dqep
+{
+
+  background-color: #f2f2f2;
+  border: 1px solid #0055af;
+}
+
+.ParameterWidget__parameter___20z_B.index__flex___38618.index__align-center___3Dqep
+{
+  color: #0055af;
+}
+
+.ParameterWidget__container___tfpVo
+{
+  border: 1px solid #0055af;
+}
+
+.h5 {
+  font-family: glober,Helvetica,Arial,sans-serif;
+  font-size: 12px;
+  color: #232323;
+  text-transform: uppercase;
+}
+
+.Scalar-title
+{
+  font-family: glober,Helvetica,Arial,sans-serif;
+  font-weight: bold;
+  font-size: 15px;
+  color: #232323;
+  // text-transform: uppercase;
+}
+
+.Scalar__Scalar___1yBQv.Scalar__large___2Rovb .Scalar__Value___4U6UK
+{
+  font-family: glober, Helvetica, Arial, sans-serif;
+  font-size: 48px;
+  white-space: nowrap;
+  font-weight: 400;
+  color: #232323;
+}
+
+.Scalar__Scalar___1yBQv.Scalar__large___2Rovb
+{
+  background-color: #f2f2f2;
+}
+
+.ScalarValue {
+  font-family: glober, Helvetica, Arial, sans-serif;
+  font-size: 84px;
+  white-space: nowrap;
+  font-weight: 400;
+  color: #232323;
 }
 
 .EmbedFrame-header,
