@@ -90,6 +90,9 @@ export default class ParameterValueWidget extends Component {
 
   getWidget() {
     const { parameter, values } = this.props;
+    if (this.props.parameter.name === 'Domain') {
+      return TextWidget;
+    }
     if (DATE_WIDGETS[parameter.type]) {
       return DATE_WIDGETS[parameter.type];
     } else if (this.getField()) {
