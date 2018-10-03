@@ -43,7 +43,7 @@
   font-weight: bold;
 }
 
-body {
+.EmbedFrame {
   font-family: glober,Helvetica,Arial,sans-serif;
 }
 
@@ -87,9 +87,18 @@ body {
 
 .EmbedFrame .h4 {
   font-family: morebi_rounded,Helvetica,Arial,sans-serif;
-  font-size: 16px;
+  font-size: 22px;
   color: #0055af;
   text-transform: uppercase;
+}
+
+.EmbedFrame .text-card-markdown h2 {
+  font-family: morebi_rounded,Helvetica,Arial,sans-serif;
+  font-size: 22px;
+  color: #0055af;
+  text-transform: uppercase;
+  margin: 0;
+  padding-right: 1.5em;
 }
 
 
@@ -120,10 +129,9 @@ body {
 .Scalar-title
 {
   font-family: glober,Helvetica,Arial,sans-serif;
-  font-weight: bold;
+  font-weight: normal;
   font-size: 15px;
   color: #232323;
-  // text-transform: uppercase;
 }
 
 /*.Scalar__Scalar___1yBQv.Scalar__large___2Rovb .Scalar__Value___4U6UK*/
@@ -142,7 +150,7 @@ body {
 
 .ScalarValue {
   font-family: glober, Helvetica, Arial, sans-serif;
-  font-size: 84px;
+  font-size: 48px !important;
   white-space: nowrap;
   font-weight: 400;
   color: #232323;
