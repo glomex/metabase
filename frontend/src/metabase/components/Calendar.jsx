@@ -22,6 +22,7 @@ export default class Calendar extends Component {
     selectedEnd: PropTypes.object,
     onChange: PropTypes.func.isRequired,
     isRangePicker: PropTypes.bool,
+    noFuture: PropTypes.bool,
     isDual: PropTypes.bool,
   };
 
@@ -62,6 +63,7 @@ export default class Calendar extends Component {
 
   onClickDay = date => {
     let { selected, selectedEnd, isRangePicker } = this.props;
+    if (date.isAfter(new Date(), "day") && this.props.noFuture) return;
     if (!isRangePicker || !selected || selectedEnd) {
       this.props.onChange(date.format("YYYY-MM-DD"), null);
     } else if (!selectedEnd) {
@@ -143,6 +145,7 @@ export default class Calendar extends Component {
           key={date.toString()}
           date={moment(date)}
           month={current}
+          noFuture={this.props.noFuture}
           onClickDay={this.onClickDay}
           selected={this.props.selected}
           selectedEnd={this.props.selectedEnd}
@@ -189,6 +192,7 @@ class Week extends Component {
   static propTypes = {
     selected: PropTypes.object,
     selectedEnd: PropTypes.object,
+    noFuture: PropTypes.bool,
     onClickDay: PropTypes.func.isRequired,
   };
 
@@ -199,6 +203,7 @@ class Week extends Component {
     for (let i = 0; i < 7; i++) {
       let classes = cx("Calendar-day p1 cursor-pointer text-centered", {
         "Calendar-day--today": date.isSame(new Date(), "day"),
+        "Calendar-day--future": date.isAfter(new Date(), "day") && this.props.noFuture,
         "Calendar-day--this-month": date.month() === month.month(),
         "Calendar-day--selected": selected && date.isSame(selected, "day"),
         "Calendar-day--selected-end":

@@ -30,12 +30,14 @@ const SingleDatePicker = ({
   filter: [op, field, value],
   onFilterChange,
   hideTimeSelectors,
+  noFuture
 }) => (
   <div className="mx2">
     <SpecificDatePicker
       value={value}
       onChange={value => onFilterChange([op, field, value])}
       hideTimeSelectors={hideTimeSelectors}
+      noFuture={noFuture}
       calendar
     />
   </div>
@@ -45,11 +47,13 @@ const MultiDatePicker = ({
   filter: [op, field, startValue, endValue],
   onFilterChange,
   hideTimeSelectors,
+  noFuture
 }) => (
   <div className="mx2 mb1">
     <div className="Grid Grid--1of2 Grid--gutters">
       <div className="Grid-cell">
         <SpecificDatePicker
+          noFuture={noFuture}
           value={startValue}
           hideTimeSelectors={hideTimeSelectors}
           onChange={value => onFilterChange([op, field, value, endValue])}
@@ -57,6 +61,7 @@ const MultiDatePicker = ({
       </div>
       <div className="Grid-cell">
         <SpecificDatePicker
+          noFuture={noFuture}
           value={endValue}
           hideTimeSelectors={hideTimeSelectors}
           onChange={value => onFilterChange([op, field, startValue, value])}
@@ -65,6 +70,7 @@ const MultiDatePicker = ({
     </div>
     <div className="Calendar--noContext">
       <Calendar
+        noFuture={noFuture}
         initial={startValue ? moment(startValue) : moment()}
         selected={startValue && moment(startValue)}
         selectedEnd={endValue && moment(endValue)}
@@ -218,6 +224,66 @@ const ALL_TIME_OPERATOR = {
   test: op => op === null,
 };
 
+export const DATE_OPERATORS_GLOMEX: Operator[] = [
+  {
+    name: "previous",
+    displayName: t`Previous`,
+    init: filter => [
+      "time-interval",
+      getDateTimeField(filter[1]),
+      -getIntervals(filter),
+      getUnit(filter),
+      getOptions(filter),
+    ],
+    test: ([op, field, value]) =>
+      // $FlowFixMe
+      (mbqlEq(op, "time-interval") && value < 0) || Object.is(value, -0),
+    widget: PreviousPicker,
+    options: { "include-current": true },
+  },
+  {
+    name: "current",
+    displayName: t`Current`,
+    init: filter => [
+      "time-interval",
+      getDateTimeField(filter[1]),
+      "current",
+      getUnit(filter),
+    ],
+    test: ([op, field, value]) =>
+      mbqlEq(op, "time-interval") && value === "current",
+    widget: CurrentPicker,
+  },
+  {
+    name: "before",
+    displayName: t`Before`,
+    init: filter => ["<", ...getDateTimeFieldAndValues(filter, 1)],
+    test: ([op]) => op === "<",
+    widget: SingleDatePicker,
+  },
+  {
+    name: "after",
+    displayName: t`After`,
+    init: filter => [">", ...getDateTimeFieldAndValues(filter, 1)],
+    test: ([op]) => op === ">",
+    widget: SingleDatePicker,
+  },
+  {
+    name: "on",
+    displayName: t`On`,
+    init: filter => ["=", ...getDateTimeFieldAndValues(filter, 1)],
+    test: ([op]) => op === "=",
+    widget: SingleDatePicker,
+  },
+  {
+    name: "between",
+    displayName: t`Between`,
+    init: filter => ["BETWEEN", ...getDateTimeFieldAndValues(filter, 2)],
+    test: ([op]) => mbqlEq(op, "between"),
+    widget: MultiDatePicker,
+  },
+];
+
 export const DATE_OPERATORS: Operator[] = [
   {
     name: "previous",
@@ -345,11 +411,16 @@ export default class DatePicker extends Component {
     className: PropTypes.string,
     hideEmptinessOperators: PropTypes.bool,
     hideTimeSelectors: PropTypes.bool,
+    hideNext: PropTypes.bool,
+    noFuture: PropTypes.bool,
     operators: PropTypes.array,
   };
 
   componentWillMount() {
     let operators = this.props.operators || DATE_OPERATORS;
+    if (this.props.hideNext) {
+      operators = DATE_OPERATORS_GLOMEX;
+    }
     if (!this.props.hideEmptinessOperators) {
       operators = operators.concat(EMPTINESS_OPERATORS);
     }

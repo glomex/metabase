@@ -13,11 +13,12 @@ const defaultRenderRemapped = ({
   displayValue,
   column,
   displayColumn,
+  hideID
 }) => (
   <span>
     <span className="text-bold">{displayValue}</span>
     {/* Show the underlying ID for PK/FK */}
-    {column.isID() && <span style={{ opacity: 0.5 }}>{" - " + value}</span>}
+    {column.isID() && !hideID && <span style={{ opacity: 0.5 }}>{" - " + value}</span>}
   </span>
 );
 
@@ -28,6 +29,7 @@ const RemappedValueContent = ({
   displayColumn,
   renderNormal = defaultRenderNormal,
   renderRemapped = defaultRenderRemapped,
+  hideID,
   ...props
 }) => {
   if (column != null) {
@@ -47,7 +49,7 @@ const RemappedValueContent = ({
     });
   }
   if (displayValue != null) {
-    return renderRemapped({ value, displayValue, column, displayColumn });
+    return renderRemapped({ value, displayValue, column, displayColumn, hideID });
   } else {
     return renderNormal({ value, column });
   }

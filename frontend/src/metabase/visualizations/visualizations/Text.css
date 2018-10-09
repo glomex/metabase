@@ -160,6 +160,6 @@
 
 @media screen and (--breakpoint-max-lg) {
   :local .Text {
-    padding: 0.5em 0 0.5em 1em;
+    padding: 0em 0 0.5em 1em;
   }
 }

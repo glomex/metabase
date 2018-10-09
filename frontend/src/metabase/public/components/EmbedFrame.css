@@ -42,6 +42,38 @@
 
   font-weight: bold;
 }
+@media (max-width: 1023px) and (min-width: 640px) {
+  .EmbedFrame .Dashboard,
+  .EmbedFrame-header{
+    width: 624px !important;
+  }
+}
+
+@media (max-width: 1279px) and (min-width: 1024px) {
+  .EmbedFrame .Dashboard,
+  .EmbedFrame-header{
+    width: 944px !important;
+  }
+}
+
+@media (max-width: 1599px) and (min-width: 1280px) {
+  .EmbedFrame .Dashboard,
+  .EmbedFrame-header{
+    width: 1184px !important;
+  }
+}
+
+@media (min-width: 1600px) {
+  .EmbedFrame .Dashboard,
+  .EmbedFrame-header{
+    width: 1424px !important;
+  }
+}
+
+.EmbedFrame .Dashboard,
+.EmbedFrame-header {
+  margin: 0 auto;
+}
 
 .EmbedFrame {
   font-family: glober,Helvetica,Arial,sans-serif;

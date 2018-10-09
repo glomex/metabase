@@ -13,9 +13,12 @@ import DateRelativeWidget from "./widgets/DateRelativeWidget.jsx";
 import DateMonthYearWidget from "./widgets/DateMonthYearWidget.jsx";
 import DateQuarterYearWidget from "./widgets/DateQuarterYearWidget.jsx";
 import DateAllOptionsWidget from "./widgets/DateAllOptionsWidget.jsx";
+import DateAllOptionsWidgetGlomex from "./widgets/DateAllOptionsWidgetGlomex.jsx";
 import CategoryWidget from "./widgets/CategoryWidget.jsx";
 import TextWidget from "./widgets/TextWidget.jsx";
 import ParameterFieldWidget from "./widgets/ParameterFieldWidget";
+import TaxonomyWidget from "./widgets/TaxonomyWidget";
+// import VideoIdWidget from "./widgets/VideoIdWidget";
 
 import { fetchField, fetchFieldValues } from "metabase/redux/metadata";
 import {
@@ -51,6 +54,15 @@ const makeMapStateToProps = () => {
 const mapDispatchToProps = {
   fetchFieldValues,
   fetchField,
+};
+const removePrefixFromVideoId = (id) => {
+  if (!id) return;
+  const indexOfPrefix = id.lastIndexOf('-');
+  if (indexOfPrefix > 3) {
+    return id.replace(id.substring(indexOfPrefix),'');
+  }
+
+  return id;
 };
 
 @connect(makeMapStateToProps, mapDispatchToProps)
@@ -93,6 +105,15 @@ export default class ParameterValueWidget extends Component {
     if (this.props.parameter.name === 'Domain') {
       return TextWidget;
     }
+    if (this.props.parameter.name === 'Date Filter') {
+      return DateAllOptionsWidgetGlomex;
+    }
+    if (this.props.parameter.name === 'Video ID') {
+      return ParameterFieldWidget;
+    }
+    if (this.props.parameter.name === 'Category' || this.props.parameter.name === 'Show' || this.props.parameter.name === 'Channel') {
+      return TaxonomyWidget;
+    }
     if (DATE_WIDGETS[parameter.type]) {
       return DATE_WIDGETS[parameter.type];
     } else if (this.getField()) {
@@ -133,7 +154,6 @@ export default class ParameterValueWidget extends Component {
   render() {
     const {
       parameter,
-      value,
       values,
       setValue,
       isEditing,
@@ -144,6 +164,15 @@ export default class ParameterValueWidget extends Component {
       className,
       focusChanged: parentFocusChanged,
     } = this.props;
+
+    let {value} = this.props;
+    if (this.props.parameter.name === 'Video ID') {
+      if (Array.isArray(value)) {
+        value = value.map(id => removePrefixFromVideoId(id));
+      } else {
+        value = removePrefixFromVideoId(value);
+      }
+    }
 
     let hasValue = value != null;
 

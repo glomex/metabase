@@ -41,6 +41,7 @@ export default class SpecificDatePicker extends Component {
 
   static propTypes = {
     value: PropTypes.string,
+    noFuture: PropTypes.bool,
     onChange: PropTypes.func.isRequired,
   };
 
@@ -129,6 +130,7 @@ export default class SpecificDatePicker extends Component {
           <ExpandingContent open={showCalendar}>
             <Calendar
               selected={date}
+              noFuture
               initial={date || moment()}
               onChange={value => this.onChange(value, hours, minutes)}
               isRangePicker={false}

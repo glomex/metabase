@@ -284,6 +284,7 @@ export class FieldValuesWidget extends Component {
           valueKey={0}
           valueRenderer={value => (
             <RemappedValue
+              hideID={this.props.hideID}
               value={value}
               column={field}
               {...formatOptions}
@@ -294,6 +295,7 @@ export class FieldValuesWidget extends Component {
           )}
           optionRenderer={option => (
             <RemappedValue
+              hideID={this.props.hideID}
               value={option[0]}
               column={field}
               round={false}

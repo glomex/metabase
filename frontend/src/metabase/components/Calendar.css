@@ -35,6 +35,11 @@
   font-weight: 700;
 }
 
+.Calendar-day--future{
+  color: #999 !important;
+  background-color: #f2f2f2 !important;
+}
+
 .Calendar-day:hover {
   color: var(--color-accent2);
 }
