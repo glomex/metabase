@@ -120,12 +120,12 @@
   font-family: glober, Helvetica, Arial, sans-serif;
 }
 
-.EmbedFrame .h4 {
-  font-family: morebi_rounded,Helvetica,Arial,sans-serif;
-  font-size: 22px;
-  color: #0055af;
-  text-transform: uppercase;
-}
+/*.EmbedFrame .h4 {*/
+  /*font-family: morebi_rounded,Helvetica,Arial,sans-serif;*/
+  /*font-size: 22px;*/
+  /*color: #0055af;*/
+  /*text-transform: uppercase;*/
+/*}*/
 
 .EmbedFrame .text-card-markdown h2 {
   font-family: morebi_rounded,Helvetica,Arial,sans-serif;
@@ -169,19 +169,13 @@
   color: #232323;
 }
 
-/*.Scalar__Scalar___1yBQv.Scalar__large___2Rovb .Scalar__Value___4U6UK*/
-/*{*/
-  /*font-family: glober, Helvetica, Arial, sans-serif;*/
-  /*font-size: 48px;*/
-  /*white-space: nowrap;*/
-  /*font-weight: 400;*/
-  /*color: #232323;*/
-/*}*/
+.EmbedFrame-header .flex.ml-auto{
+  margin: 0;
+}
 
-/*.Scalar__Scalar___1yBQv.Scalar__large___2Rovb*/
-/*{*/
-  /*background-color: #f2f2f2;*/
-/*}*/
+.EmbedFrame-header .h4.text-bold.sm-h3.md-h2{
+  display: none;
+}
 
 .ScalarValue {
   font-family: glober, Helvetica, Arial, sans-serif;
