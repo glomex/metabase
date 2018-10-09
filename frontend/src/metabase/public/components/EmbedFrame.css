@@ -74,6 +74,9 @@
 .EmbedFrame-header {
   margin: 0 auto;
 }
+.flex.flex-column.relative.full.flex-full {
+  background: #f2f2f2;
+}
 
 .EmbedFrame {
   font-family: glober,Helvetica,Arial,sans-serif;
