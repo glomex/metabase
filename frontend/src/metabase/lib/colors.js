@@ -12,14 +12,24 @@ type ColorFamily = { [name: ColorName]: ColorString };
 // NOTE: KEEP SYNCRONIZED WITH COLORS.CSS
 /* eslint-disable no-color-literals */
 const colors = {
-  brand: "#509EE3",
-  accent1: "#9CC177",
-  accent2: "#A989C5",
-  accent3: "#EF8C8C",
-  accent4: "#F9D45C",
-  accent5: "#F1B556",
-  accent6: "#A6E7F3",
-  accent7: "#7172AD",
+  brand: "#7A9FFF",
+  accent1: "#B352CD",
+  accent2: "#7ED321",
+  accent3: "#15233C",
+  accent4: "#5A4889",
+  accent5: "#0055AF",
+  accent6: "#BBCEFF",
+  accent7: "#32AFE1",
+
+  // accent3: "#CC549F",
+  // accent5: "#8C96A0",
+  // accent6: "#650082",
+  // brand: '#C800FF',
+  // accent7: "#9F8ADD,",
+  // accent7: "#2391FF",
+  // accent7: "#5D2ADB",
+  // accent7: "#8B277E",
+
   white: "#FFFFFF",
   black: "#2E353B",
   success: "#84BB4C",
@@ -37,6 +47,33 @@ const colors = {
   shadow: "rgba(0,0,0,0.08)",
   border: "#D7DBDE",
 };
+//
+// const oldColors = {
+//   brand: "#509EE3",
+//   accent1: "#9CC177",
+//   accent2: "#A989C5",
+//   accent3: "#EF8C8C",
+//   accent4: "#F9D45C",
+//   accent5: "#F1B556",
+//   accent6: "#A6E7F3",
+//   accent7: "#7172AD",
+//   white: "#FFFFFF",
+//   black: "#2E353B",
+//   success: "#84BB4C",
+//   error: "#ED6E6E",
+//   warning: "#F9CF48",
+//   "text-dark": "#2E353B",
+//   "text-medium": "#74838F",
+//   "text-light": "#C7CFD4",
+//   "text-white": "#FFFFFF",
+//   "bg-black": "#2E353B",
+//   "bg-dark": "#93A1AB",
+//   "bg-medium": "#EDF2F5",
+//   "bg-light": "#F9FBFC",
+//   "bg-white": "#FFFFFF",
+//   shadow: "rgba(0,0,0,0.08)",
+//   border: "#D7DBDE",
+// };
 /* eslint-enable no-color-literals */
 export default colors;
 

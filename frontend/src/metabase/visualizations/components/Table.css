@@ -4,6 +4,7 @@
   border-spacing: 0;
 
   width: 100%;
+  table-layout: fixed;
 
   font-family: "Helvetica Neue", "Helvetica", sans-serif;
   font-size: 12px;
@@ -19,6 +20,8 @@
 :local(.Table) td {
   padding: 1em;
   border-bottom: 1px solid color(var(--color-border) alpha(-70%));
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 :local(.TableSimple) th:first-child,

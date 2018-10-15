@@ -74,6 +74,22 @@
 .EmbedFrame-header {
   margin: 0 auto;
 }
+
+.EmbedFrame-header {
+  flex-shrink: 0;
+}
+
+.EmbedFrame-footer{
+  display: none;
+}
+
+.EmbedFrame div.flex.flex-column.flex-full.relative.scroll-y{
+  overflow: hidden;
+  height: 3104px;
+  flex: auto;
+}
+
+
 .flex.flex-column.relative.full.flex-full {
   background: #f2f2f2;
 }
@@ -220,4 +236,20 @@
 .Theme--night.EmbedFrame .enable-dots-onhover .dc-tooltip circle.dot:hover,
 .Theme--night.EmbedFrame .enable-dots .dc-tooltip circle.dot {
   fill: currentColor;
+}
+
+.DashboardGrid div:nth-child(7) th:first-child,
+.DashboardGrid div:nth-child(7) td:first-child{
+  width: 20%;
+  text-align: left;
+}
+.DashboardGrid div:nth-child(7) th:nth-child(2),
+.DashboardGrid div:nth-child(7) td:nth-child(2){
+  width: 50%;
+  text-align: left;
+}
+.DashboardGrid div:nth-child(8) th:nth-child(2),
+.DashboardGrid div:nth-child(8) td:nth-child(2){
+  width: 70%;
+  text-align: left;
 }

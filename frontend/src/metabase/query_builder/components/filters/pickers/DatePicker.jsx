@@ -226,22 +226,6 @@ const ALL_TIME_OPERATOR = {
 
 export const DATE_OPERATORS_GLOMEX: Operator[] = [
   {
-    name: "previous",
-    displayName: t`Previous`,
-    init: filter => [
-      "time-interval",
-      getDateTimeField(filter[1]),
-      -getIntervals(filter),
-      getUnit(filter),
-      getOptions(filter),
-    ],
-    test: ([op, field, value]) =>
-      // $FlowFixMe
-      (mbqlEq(op, "time-interval") && value < 0) || Object.is(value, -0),
-    widget: PreviousPicker,
-    options: { "include-current": true },
-  },
-  {
     name: "current",
     displayName: t`Current`,
     init: filter => [
@@ -255,29 +239,8 @@ export const DATE_OPERATORS_GLOMEX: Operator[] = [
     widget: CurrentPicker,
   },
   {
-    name: "before",
-    displayName: t`Before`,
-    init: filter => ["<", ...getDateTimeFieldAndValues(filter, 1)],
-    test: ([op]) => op === "<",
-    widget: SingleDatePicker,
-  },
-  {
-    name: "after",
-    displayName: t`After`,
-    init: filter => [">", ...getDateTimeFieldAndValues(filter, 1)],
-    test: ([op]) => op === ">",
-    widget: SingleDatePicker,
-  },
-  {
-    name: "on",
-    displayName: t`On`,
-    init: filter => ["=", ...getDateTimeFieldAndValues(filter, 1)],
-    test: ([op]) => op === "=",
-    widget: SingleDatePicker,
-  },
-  {
     name: "between",
-    displayName: t`Between`,
+    displayName: 'Custom',
     init: filter => ["BETWEEN", ...getDateTimeFieldAndValues(filter, 2)],
     test: ([op]) => mbqlEq(op, "between"),
     widget: MultiDatePicker,
