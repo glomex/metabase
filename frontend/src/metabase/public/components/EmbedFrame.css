@@ -77,6 +77,13 @@
 
 .EmbedFrame-header {
   flex-shrink: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.Dashboard{
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .EmbedFrame-footer{
