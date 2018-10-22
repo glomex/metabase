@@ -30,6 +30,16 @@ type State = {
 
 const BORDER_WIDTH = 2;
 
+const removePrefixFromVideoId = (id) => {
+  if (!id) return;
+  const indexOfPrefix = id.lastIndexOf('-');
+  if (indexOfPrefix > 3) {
+    return id.replace(id.substring(indexOfPrefix),'');
+  }
+
+  return id;
+};
+
 const normalizeValue = value =>
   Array.isArray(value) ? value : value != null ? [value] : [];
 
@@ -151,7 +161,13 @@ export default class ParameterFieldWidget extends Component<*, Props, State> {
               className="ml-auto"
               disabled={savedValue.length === 0 && unsavedValue.length === 0}
               onClick={() => {
-                setValue(unsavedValue.length > 0 ? unsavedValue : null);
+                let newUnsaved = unsavedValue;
+                if (Array.isArray(newUnsaved)) {
+                  newUnsaved = newUnsaved.map(id => removePrefixFromVideoId(id));
+                } else {
+                  newUnsaved = removePrefixFromVideoId(newUnsaved);
+                }
+                setValue(newUnsaved.length > 0 ? newUnsaved : null);
                 focusChanged(false);
               }}
             >

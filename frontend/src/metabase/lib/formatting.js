@@ -47,12 +47,23 @@ const DEFAULT_NUMBER_OPTIONS: FormattingOptions = {
   compact: false,
   round: true,
 };
+var formattingMapping = {
+  ",":".",
+  ".": ","
+};
+const PRECISION_NUMBER_FORMATTER = (n) => d3.format(".2r")(n).replace(/[,.]/gi, (m) => formattingMapping[m]);
+const FIXED_NUMBER_FORMATTER = (n) => d3.format(",.f")(n).replace(/[,.]/gi, (m) => formattingMapping[m]);
+const FIXED_NUMBER_FORMATTER_NO_COMMA = (n) => d3.format(".f")(n).replace(/[,.]/gi, (m) => formattingMapping[m]);
+const DECIMAL_DEGREES_FORMATTER = (n) => d3.format(".08f")(n).replace(/[,.]/gi, (m) => formattingMapping[m]);
+const DECIMAL_DEGREES_FORMATTER_COMPACT = (n) => d3.format(".02f")(n).replace(/[,.]/gi, (m) => formattingMapping[m]);
 
-const PRECISION_NUMBER_FORMATTER = d3.format(".2r");
-const FIXED_NUMBER_FORMATTER = d3.format(",.f");
-const FIXED_NUMBER_FORMATTER_NO_COMMA = d3.format(".f");
-const DECIMAL_DEGREES_FORMATTER = d3.format(".08f");
-const DECIMAL_DEGREES_FORMATTER_COMPACT = d3.format(".02f");
+
+
+// const PRECISION_NUMBER_FORMATTER = d3.format(".2r");
+// const FIXED_NUMBER_FORMATTER = d3.format(",.f");
+// const FIXED_NUMBER_FORMATTER_NO_COMMA = d3.format(".f");
+// const DECIMAL_DEGREES_FORMATTER = d3.format(".08f");
+// const DECIMAL_DEGREES_FORMATTER_COMPACT = d3.format(".02f");
 const BINNING_DEGREES_FORMATTER = (value, binWidth) => {
   return d3.format(`.0${decimalCount(binWidth)}f`)(value);
 };
@@ -89,8 +100,10 @@ export function formatNumber(number: number, options: FormattingOptions = {}) {
       number = d3.round(number, 2);
     }
     if (options.comma) {
+      // console.log(FIXED_NUMBER_FORMATTER(number))
       return FIXED_NUMBER_FORMATTER(number);
     } else {
+      // console.log(FIXED_NUMBER_FORMATTER_NO_COMMA(number))
       return FIXED_NUMBER_FORMATTER_NO_COMMA(number);
     }
   }
@@ -203,7 +216,7 @@ export function formatTimeRangeWithUnit(
 
 function formatWeek(m: Moment, options: FormattingOptions = {}) {
   // force 'en' locale for now since our weeks currently always start on Sundays
-  m = m.locale("en");
+  m = m.locale("de-DE");
   return formatMajorMinor(m.format("wo"), m.format("gggg"), options);
 }
 

@@ -1362,6 +1362,8 @@ var utcFormat;
 var utcParse;
 
 defaultLocale({
+  "decimal": ",",
+  "thousands": ".",
   dateTime: "%x, %X",
   date: "%-m/%-d/%Y",
   time: "%-I:%M:%S %p",
@@ -8176,7 +8178,7 @@ var Harmonizer = function () {
 		}
 		return color;
 	};
-	
+
 	var harmonize = function (color, degrees) {
 		var ret = [], hsl, h, s, l, a, i, degree;
 		hsl = color.hsl();

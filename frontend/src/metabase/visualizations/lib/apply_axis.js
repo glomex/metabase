@@ -302,6 +302,22 @@ export function applyChartOrdinalXAxis(
 
 export function applyChartYAxis(chart, series, yExtent, axisName) {
   let axis;
+  const dede = {
+    "decimal": ",",
+    "thousands": ".",
+    "grouping": [3],
+    "currency": ["$", ""],
+    "dateTime": "%a %b %e %X %Y",
+    "date": "%m/%d/%Y",
+    "time": "%H:%M:%S",
+    "periods": ["AM", "PM"],
+    "days": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    "shortDays": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    "shortMonths": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  };
+  const DE = d3.locale(dede);
+
   if (axisName !== "right") {
     axis = {
       scale: (...args) => chart.y(...args),
@@ -340,8 +356,10 @@ export function applyChartYAxis(chart, series, yExtent, axisName) {
     }
     chart.renderHorizontalGridLines(true);
     adjustYAxisTicksIfNeeded(axis.axis(), chart.height());
+    axis.axis().tickFormat(DE.numberFormat(''));
   } else {
     axis.axis().ticks(0);
+    axis.axis().tickFormat(DE.numberFormat(''));
   }
 
   let scale;
@@ -353,7 +371,7 @@ export function applyChartYAxis(chart, series, yExtent, axisName) {
   } else {
     scale = d3.scale.linear();
   }
-
+  axis.axis().tickFormat(DE.numberFormat(''));
   if (axis.setting("auto_range")) {
     // elasticY not compatible with log scale
     if (axis.setting("scale") !== "log") {

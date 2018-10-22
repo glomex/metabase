@@ -8,6 +8,7 @@ import { t } from "c-3po";
 import ExplicitSize from "metabase/components/ExplicitSize.jsx";
 import Ellipsified from "metabase/components/Ellipsified.jsx";
 import Icon from "metabase/components/Icon.jsx";
+import Tooltip from "metabase/components/Tooltip.jsx";
 
 import { formatColumn, formatValue } from "metabase/lib/formatting";
 import {
@@ -168,6 +169,13 @@ export default class TableSimple extends Component {
                       const isClickable =
                         onVisualizationClick &&
                         visualizationIsClickable(clicked);
+                      const textVal = cell == null
+                        ? "-"
+                        : formatValue(cell, {
+                          column: cols[columnIndex],
+                          jsx: true,
+                          rich: true,
+                        });
                       return (
                         <td
                           key={columnIndex}
@@ -187,6 +195,7 @@ export default class TableSimple extends Component {
                             ),
                           })}
                         >
+                          <Tooltip tooltip={textVal} maxWidth={"22em"}>
                           <span
                             className={cx({
                               "cursor-pointer text-brand-hover": isClickable,
@@ -202,14 +211,9 @@ export default class TableSimple extends Component {
                                 : undefined
                             }
                           >
-                            {cell == null
-                              ? "-"
-                              : formatValue(cell, {
-                                  column: cols[columnIndex],
-                                  jsx: true,
-                                  rich: true,
-                                })}
+                            {textVal}
                           </span>
+                          </Tooltip>
                         </td>
                       );
                     })}

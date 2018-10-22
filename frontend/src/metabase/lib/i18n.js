@@ -18,8 +18,8 @@ export function setLocalization(translationsObject) {
   addMsgIds(translationsObject);
 
   // add and set locale with C-3PO
-  addLocale(locale, translationsObject);
-  useLocale(locale);
+  addLocale('de', translationsObject);
+  useLocale('de');
 }
 
 // we delete msgid property since it's redundant, but have to add it back in to

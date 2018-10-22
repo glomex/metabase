@@ -82,7 +82,7 @@ export default class Scalar extends Component {
           { name: "100.000,00", value: "de" },
         ],
       },
-      default: "en",
+      default: "de",
     },
     "scalar.decimals": {
       title: t`Number of decimal places`,
@@ -154,13 +154,13 @@ export default class Scalar extends Component {
         // format with separators and correct number of decimals
         if (settings["scalar.locale"]) {
           number = number.toLocaleString(
-            settings["scalar.locale"],
+            'de-DE',
             localeStringOptions,
           );
         } else {
           // HACK: no locales that don't thousands separators?
           number = number
-            .toLocaleString("en", localeStringOptions)
+            .toLocaleString("de-DE", localeStringOptions)
             .replace(/,/g, "");
         }
       } catch (e) {
