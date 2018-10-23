@@ -98,6 +98,16 @@ export default class TaxonomyWidget extends Component<*, Props, State> {
       ? "Enter a default value..."
       : defaultPlaceholder;
 
+    function compare(a,b) {
+      if (a[1] < b[1])
+        return -1;
+      if (a[1]> b[1])
+        return 1;
+      return 0;
+    }
+
+    field.values.sort(compare);
+
     if (!isFocused) {
       return (
         <div
