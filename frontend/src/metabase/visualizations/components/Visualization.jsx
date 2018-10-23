@@ -470,28 +470,7 @@ export default class Visualization extends Component {
           </div>
         ) : loading ? (
           <div className="flex-full p1 text-centered text-brand flex flex-column layout-centered">
-            {isSlow ? (
-              <div className="text-slate">
-                <div className="h4 text-bold mb1">{t`Still Waiting...`}</div>
-                {isSlow === "usually-slow" ? (
-                  <div>
-                    {jt`This usually takes an average of ${(
-                      <span style={{ whiteSpace: "nowrap" }}>
-                        {duration(expectedDuration)}
-                      </span>
-                    )}.`}
-                    <br />
-                    {t`(This is a bit long for a dashboard)`}
-                  </div>
-                ) : (
-                  <div>
-                    {t`This is usually pretty fast but seems to be taking awhile right now.`}
-                  </div>
-                )}
-              </div>
-            ) : (
-              <LoadingSpinner className="text-slate" />
-            )}
+            <LoadingSpinner className="text-slate" />
           </div>
         ) : (
           // $FlowFixMe
