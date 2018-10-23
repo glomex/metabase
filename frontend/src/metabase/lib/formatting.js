@@ -51,7 +51,7 @@ var formattingMapping = {
   ",":".",
   ".": ","
 };
-const PRECISION_NUMBER_FORMATTER = (n) => d3.format(".2r")(n).replace(/[,.]/gi, (m) => formattingMapping[m]);
+const PRECISION_NUMBER_FORMATTER = d3.format(".2r");
 const FIXED_NUMBER_FORMATTER = (n) => d3.format(",.f")(n).replace(/[,.]/gi, (m) => formattingMapping[m]);
 const FIXED_NUMBER_FORMATTER_NO_COMMA = (n) => d3.format(".f")(n).replace(/[,.]/gi, (m) => formattingMapping[m]);
 const DECIMAL_DEGREES_FORMATTER = (n) => d3.format(".08f")(n).replace(/[,.]/gi, (m) => formattingMapping[m]);
