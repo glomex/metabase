@@ -4,11 +4,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { t } from "c-3po";
-
+import _ from "underscore";
 import { createMultiwordSearchRegex } from "metabase/lib/string";
-import { getHumanReadableValue } from "metabase/lib/query/field";
 
 import SelectPicker from "../../../query_builder/components/filters/pickers/SelectPicker.jsx";
+import {getHumanReadableValue} from "metabase/lib/query/field";
 
 type Props = {
   value: any,
@@ -60,7 +60,13 @@ export default class TaxonomyWidgetNotEditable extends Component {
     if (Array.isArray(values) && values.length > 1) {
       return `${values.length} selections`;
     } else {
-      return getHumanReadableValue(values, fieldValues);
+      let res = values[0];
+      fieldValues.filter((val) => {
+        if (val[0] === values[0]) {
+          res = val[1];
+        }
+      });
+      return res;
     }
   }
 
