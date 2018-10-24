@@ -18,6 +18,7 @@ import CategoryWidget from "./widgets/CategoryWidget.jsx";
 import TextWidget from "./widgets/TextWidget.jsx";
 import ParameterFieldWidget from "./widgets/ParameterFieldWidget";
 import TaxonomyWidget from "./widgets/TaxonomyWidget";
+import TaxonomyWidgetNotEditable from "./widgets/TaxonomyWidgetNotEditable";
 // import VideoIdWidget from "./widgets/VideoIdWidget";
 
 import { fetchField, fetchFieldValues } from "metabase/redux/metadata";
@@ -112,7 +113,7 @@ export default class ParameterValueWidget extends Component {
       return ParameterFieldWidget;
     }
     if (this.props.parameter.name === 'Category' || this.props.parameter.name === 'Show' || this.props.parameter.name === 'Channel') {
-      return TaxonomyWidget;
+      return TaxonomyWidgetNotEditable;
     }
     if (DATE_WIDGETS[parameter.type]) {
       return DATE_WIDGETS[parameter.type];

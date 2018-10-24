@@ -106,7 +106,9 @@ export default class TaxonomyWidget extends Component<*, Props, State> {
       return 0;
     }
 
-    field.values.sort(compare);
+    if (Array.isArray(field.values)) {
+      field.values.sort(compare);
+    }
 
     if (!isFocused) {
       return (
