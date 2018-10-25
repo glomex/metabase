@@ -1,6 +1,6 @@
 /* @flow */
 
-import { GET, PUT, POST, DELETE } from "metabase/lib/api";
+import { GET, PUT, POST, DELETE, GET_WITH_XHR } from "metabase/lib/api";
 import { IS_EMBED_PREVIEW } from "metabase/lib/embed";
 
 // use different endpoints for embed previews
@@ -90,6 +90,9 @@ export const EmbedApi = {
   cardQuery: GET(embedBase + "/card/:token/query"),
   dashboard: GET(embedBase + "/dashboard/:token"),
   dashboardCardQuery: GET(
+    embedBase + "/dashboard/:token/dashcard/:dashcardId/card/:cardId",
+  ),
+  dashboardCardQueryWithXHR: GET_WITH_XHR(
     embedBase + "/dashboard/:token/dashcard/:dashcardId/card/:cardId",
   ),
 };

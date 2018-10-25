@@ -56,6 +56,8 @@ import { getCardAfterVisualizationClick } from "metabase/visualizations/lib/util
 
 const DATASET_SLOW_TIMEOUT = 15 * 1000;
 
+let dashboardPromises = {};
+
 // normalizr schemas
 const dashcard = new schema.Entity("dashcard");
 const card = new schema.Entity("card");
@@ -467,14 +469,21 @@ export const fetchCardData = createThunkAction(FETCH_CARD_DATA, function(
         }),
       );
     } else if (dashboardType === "embed") {
-      result = await fetchDataOrError(
-        EmbedApi.dashboardCardQuery({
-          token: dashcard.dashboard_id,
-          dashcardId: dashcard.id,
-          cardId: card.id,
-          ...getParametersBySlug(dashboard.parameters, parameterValues),
-        }),
-      );
+
+      if (dashboardPromises[dashcard.id] && dashboardPromises[dashcard.id].call) {
+        dashboardPromises[dashcard.id].call.xhr.abort();
+        dashboardPromises[dashcard.id].call.promise.cancel();
+      }
+      let call = EmbedApi.dashboardCardQueryWithXHR({
+        token: dashcard.dashboard_id,
+        dashcardId: dashcard.id,
+        cardId: card.id,
+        ...getParametersBySlug(dashboard.parameters, parameterValues),
+      });
+
+      dashboardPromises[dashcard.id] = {call};
+
+      result = await fetchDataOrError(call.promise.promise);
     } else if (dashboardType === "transient") {
       result = await fetchDataOrError(MetabaseApi.dataset(datasetQuery));
     } else {
