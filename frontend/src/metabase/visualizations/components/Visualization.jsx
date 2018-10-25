@@ -457,16 +457,8 @@ export default class Visualization extends Component {
             {!small && <span className="h4 text-bold">No results!</span>}
           </div>
         ) : error ? (
-          <div
-            className={
-              "flex-full px1 pb1 text-centered flex flex-column layout-centered " +
-              (isDashboard ? "text-slate-light" : "text-slate")
-            }
-          >
-            <Tooltip tooltip={error} isEnabled={small}>
-              <Icon className="mb2" name={errorIcon || "warning"} size={50} />
-            </Tooltip>
-            {!small && <span className="h4 text-bold">{error}</span>}
+          <div className="flex-full p1 text-centered text-brand flex flex-column layout-centered">
+            <LoadingSpinner className="text-slate" />
           </div>
         ) : loading ? (
           <div className="flex-full p1 text-centered text-brand flex flex-column layout-centered">
