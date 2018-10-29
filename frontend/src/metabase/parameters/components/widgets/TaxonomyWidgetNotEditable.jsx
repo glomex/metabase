@@ -82,12 +82,19 @@ export default class TaxonomyWidgetNotEditable extends Component {
     if (Array.isArray(this.props.values)) {
       this.props.values.sort(compare);
     }
-
-    return this.props.values.slice().map(value => {
-      return {
-        name: value[1],
-        key: value[0],
-      };
+    const res = this.props.values.filter(value => {
+      if (value[1] !== '') {
+        return {
+          name: value[1],
+          key: value[0],
+        };
+      }
+    });
+    return res.slice().map(value => {
+        return {
+          name: value[1],
+          key: value[0],
+        };
     });
   }
 
